@@ -1,0 +1,7 @@
+[
+  { "id": "S101", "name": "Aditi Rao", "fails": 2, "weakConcept": "Action-Reaction Pairs", "status": "At-Risk" },
+  { "id": "S102", "name": "Karthik Gowda", "fails": 0, "weakConcept": "None", "status": "On-Track" },
+  { "id": "S103", "name": "Mohammed Zeeshan", "fails": 3, "weakConcept": "Action-Reaction Pairs", "status": "Critical" },
+  { "id": "S104", "name": "Sneha Nair", "fails": 0, "weakConcept": "None", "status": "On-Track" },
+  { "id": "S105", "name": "Vikram Patil", "fails": 2, "weakConcept": "Newton's First Law", "status": "At-Risk" }
+]

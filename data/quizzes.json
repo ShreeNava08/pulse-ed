@@ -1,0 +1,41 @@
+[
+  {
+    "id": "quiz_01",
+    "topic": "Physics: Laws of Motion",
+    "questions": [
+      {
+        "id": "q1",
+        "text": "If the net external force on a moving object is zero, what happens to its velocity?",
+        "concept": "Newton's First Law",
+        "options": [
+          "It drops to zero instantly",
+          "It remains constant in magnitude and direction",
+          "It continuously increases"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "q2",
+        "text": "A heavy book rests on a table. Which pair represents Newton's 3rd Law pair?",
+        "concept": "Action-Reaction Pairs",
+        "options": [
+          "Gravity pulling down & Normal force pushing up",
+          "Book pushing the table & Table pushing the book",
+          "Weight of the book & Air resistance"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "q3",
+        "text": "Why do passengers jerk forward when a bus suddenly hits the brakes?",
+        "concept": "Inertia of Motion",
+        "options": [
+          "A backward force pushes them",
+          "Their upper body continues in forward motion due to inertia",
+          "Air friction inside the cabin increases"
+        ],
+        "correctIndex": 1
+      }
+    ]
+  }
+]
