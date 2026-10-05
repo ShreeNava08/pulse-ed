@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const fs = require('fs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -8,10 +9,42 @@ const PORT = process.env.PORT || 3000;
 // Middleware
 app.use(cors());
 app.use(express.json());
-// Serve HTML files directly from current folder
-app.use(express.static(__dirname));
 
-// Self-contained data
+// Serve static assets from both root and public directories
+app.use(express.static(__dirname));
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Safe file resolver (checks root, public folder, and case sensitivity)
+function sendHtmlFile(res, fileName) {
+  const rootPath = path.join(__dirname, fileName);
+  const publicPath = path.join(__dirname, 'public', fileName);
+
+  if (fs.existsSync(rootPath)) {
+    return res.sendFile(rootPath);
+  } else if (fs.existsSync(publicPath)) {
+    return res.sendFile(publicPath);
+  } else {
+    return res.status(404).send(
+      `<h3>Error 404: ${fileName} not found</h3>` +
+      `<p>Make sure ${fileName} is added and pushed to your GitHub repository.</p>`
+    );
+  }
+}
+
+// Web Page Routes
+app.get('/', (req, res) => {
+  sendHtmlFile(res, 'student.html');
+});
+
+app.get('/student.html', (req, res) => {
+  sendHtmlFile(res, 'student.html');
+});
+
+app.get('/teacher.html', (req, res) => {
+  sendHtmlFile(res, 'teacher.html');
+});
+
+// Self-contained Quiz and Student Datasets
 let quizzes = [
   {
     id: "quiz_01",
@@ -58,7 +91,7 @@ let liveSubmissions = [
 
 let totalSubmissionsCount = 28;
 
-// Routes
+// API Endpoints
 app.get('/api/active-quiz', (req, res) => {
   res.json(quizzes[0]);
 });
@@ -77,7 +110,6 @@ app.post('/api/submit', (req, res) => {
   const displayName = studentName || studentId || "Demo Student";
   const displayId = studentId || "DEMO";
 
-  // Add submission to top of live feed
   liveSubmissions.unshift({
     name: displayName,
     id: displayId,
@@ -87,7 +119,6 @@ app.post('/api/submit', (req, res) => {
 
   totalSubmissionsCount += 1;
 
-  // Dynamically add low scores to the At-Risk table
   if (correctCount <= 1) {
     const existingIndex = students.findIndex(s => s.id === displayId);
     if (existingIndex !== -1) {
@@ -120,9 +151,7 @@ app.get('/api/analytics', (req, res) => {
     recentSubmissions: liveSubmissions
   });
 });
-app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'student.html'));
-});
+
 app.listen(PORT, () => {
   console.log(`Server online on port ${PORT}!`);
 });
