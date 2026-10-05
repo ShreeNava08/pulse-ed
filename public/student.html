@@ -6,10 +6,9 @@
   <title>PulseEd - Daily Exit Ticket</title>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FontAwesome for clean icons -->
+  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Smooth transitions and mobile styling */
     input[type="radio"]:checked + label {
       border-color: #2563eb;
       background-color: #eff6ff;
@@ -17,97 +16,121 @@
     }
   </style>
 </head>
-<body class="bg-slate-50 min-h-screen text-slate-800 antialiased flex flex-col items-center p-4">
+<body class="bg-slate-50 min-h-screen text-slate-800 antialiased flex flex-col items-center p-3 sm:p-5">
 
-  <!-- Mobile-Friendly Container -->
   <main class="w-full max-w-md bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden my-auto">
     
-    <!-- Top Header -->
+    <!-- Header -->
     <header class="bg-gradient-to-r from-blue-600 to-indigo-600 p-5 text-white">
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-2">
-          <div class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center font-bold text-white text-lg">
+          <div class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center font-bold text-white text-base">
             <i class="fa-solid fa-heart-pulse"></i>
           </div>
           <span class="font-bold tracking-wide text-lg">PulseEd</span>
         </div>
-        <span class="text-xs bg-white/20 px-2.5 py-1 rounded-full font-medium tracking-wide">
-          <i class="fa-regular fa-clock mr-1"></i> <span id="timer">00:00</span>
-        </span>
+        
+        <!-- Switch to Teacher Portal Button -->
+        <a href="/teacher.html" class="text-xs bg-white/20 hover:bg-white/30 text-white font-semibold px-2.5 py-1.5 rounded-lg transition inline-flex items-center space-x-1 shadow-sm">
+          <i class="fa-solid fa-chalkboard-user"></i>
+          <span>Teacher View</span>
+        </a>
       </div>
-      <div class="mt-4">
-        <h1 class="text-xl font-bold" id="quizTopic">Physics: Laws of Motion</h1>
-        <p class="text-xs text-blue-100 mt-1">2-Minute Daily Check-in • Anonymous to Classmates</p>
+
+      <div class="mt-4 flex items-center justify-between">
+        <div>
+          <h1 class="text-lg font-bold" id="quizTopic">Physics: Laws of Motion</h1>
+          <p class="text-xs text-blue-100">Daily Concept Check-in • Anonymous to Peers</p>
+        </div>
+        <span class="text-xs bg-white/20 px-2 py-1 rounded-full font-medium tracking-wide shrink-0">
+          <i class="fa-regular fa-clock mr-1"></i><span id="timer">00:00</span>
+        </span>
       </div>
     </header>
 
     <!-- Quiz Form -->
-    <form id="quizForm" class="p-5 space-y-6">
+    <form id="quizForm" class="p-5 space-y-5">
       
-      <!-- Student Identifier -->
-      <div>
-        <label for="studentId" class="block text-xs font-semibold uppercase text-slate-500 mb-1.5 tracking-wider">
-          Student ID / Roll No.
-        </label>
-        <select id="studentId" required class="w-full bg-slate-50 border border-slate-300 text-slate-700 rounded-xl px-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition">
-          <option value="" disabled selected>Select your student profile</option>
-          <option value="S101">S101 - Aditi Rao</option>
-          <option value="S102">S102 - Karthik Gowda</option>
-          <option value="S103">S103 - Mohammed Zeeshan</option>
-          <option value="S104">S104 - Sneha Nair</option>
-          <option value="S105">S105 - Vikram Patil</option>
-        </select>
+      <!-- Custom Student / Judge Input -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div>
+          <label for="studentName" class="block text-xs font-semibold uppercase text-slate-500 mb-1 tracking-wider">
+            Your Name
+          </label>
+          <input 
+            type="text" 
+            id="studentName" 
+            required 
+            placeholder="e.g., Judge / Ramesh" 
+            class="w-full bg-slate-50 border border-slate-300 text-slate-700 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          >
+        </div>
+        <div>
+          <label for="studentId" class="block text-xs font-semibold uppercase text-slate-500 mb-1 tracking-wider">
+            Roll / ID No.
+          </label>
+          <input 
+            type="text" 
+            id="studentId" 
+            required 
+            placeholder="e.g., JDG-01" 
+            class="w-full bg-slate-50 border border-slate-300 text-slate-700 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+          >
+        </div>
       </div>
 
       <hr class="border-slate-100">
 
-      <!-- Dynamic Questions Container -->
-      <div id="questionsContainer" class="space-y-6">
-        <!-- Rendered by JavaScript -->
-      </div>
+      <!-- Dynamic Questions -->
+      <div id="questionsContainer" class="space-y-5"></div>
 
       <!-- Action Button -->
       <button 
         type="submit" 
         id="submitBtn"
-        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3.5 px-4 rounded-xl shadow-md transition duration-200 flex items-center justify-center space-x-2 text-sm">
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-xl shadow-md transition duration-200 flex items-center justify-center space-x-2 text-sm">
         <span>Submit Exit Ticket</span>
         <i class="fa-solid fa-arrow-right text-xs"></i>
       </button>
     </form>
 
-    <!-- Success Screen (Hidden by default) -->
+    <!-- Success Screen -->
     <section id="successScreen" class="p-8 text-center hidden space-y-4">
       <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto text-2xl shadow-inner animate-bounce">
         <i class="fa-solid fa-check"></i>
       </div>
       <div>
         <h2 class="text-xl font-bold text-slate-800">Response Recorded!</h2>
-        <p class="text-xs text-slate-500 mt-1.5 leading-relaxed">
-          Completed in <span id="completionTime" class="font-semibold text-slate-700">--</span>. Your teacher will review concept takeaways before tomorrow's class.
+        <p class="text-xs text-slate-500 mt-1 leading-relaxed">
+          Completed in <span id="completionTime" class="font-semibold text-slate-700">--</span>. Dashboard updated in real time.
         </p>
       </div>
-      
+
       <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-left text-xs text-slate-600 space-y-1">
         <p class="font-semibold text-slate-700 flex items-center">
           <i class="fa-solid fa-lightbulb text-amber-500 mr-1.5"></i> Why this helps:
         </p>
-        <p>No penalty for mistakes. Your response flags which concepts need 5-minute revision tomorrow.</p>
+        <p>No penalty for mistakes. Your response flags which concepts need revision before next class.</p>
       </div>
 
-      <button 
-        type="button" 
-        onclick="resetQuiz()" 
-        class="text-xs text-blue-600 hover:text-blue-800 font-medium py-2">
-        Submit Another (For Hackathon Demo)
-      </button>
+      <div class="flex flex-col space-y-2 pt-2">
+        <button 
+          type="button" 
+          onclick="resetQuiz()" 
+          class="text-xs text-blue-600 hover:text-blue-800 font-medium py-1.5">
+          Submit Another Entry (Demo Mode)
+        </button>
+        <a 
+          href="/teacher.html" 
+          class="text-xs bg-slate-900 hover:bg-slate-800 text-white font-semibold py-2.5 px-4 rounded-xl transition inline-block">
+          View Teacher Dashboard Live →
+        </a>
+      </div>
     </section>
 
   </main>
 
-  <!-- Frontend Logic -->
   <script>
-    // Default fallback questions (used if server is offline or loading fails)
     const fallbackQuiz = {
       id: "quiz_01",
       topic: "Physics: Laws of Motion",
@@ -152,7 +175,6 @@
     let secondsElapsed = 0;
     let timerInterval = null;
 
-    // Start Timer
     function startTimer() {
       const timerDisplay = document.getElementById("timer");
       timerInterval = setInterval(() => {
@@ -163,7 +185,6 @@
       }, 1000);
     }
 
-    // Load Quiz Data
     async function loadQuiz() {
       try {
         const res = await fetch('/api/active-quiz');
@@ -179,14 +200,13 @@
       startTimer();
     }
 
-    // Render questions dynamically
     function renderQuestions(questions) {
       const container = document.getElementById("questionsContainer");
       container.innerHTML = "";
 
       questions.forEach((q, qIdx) => {
         const questionBlock = document.createElement("div");
-        questionBlock.className = "space-y-3";
+        questionBlock.className = "space-y-2.5";
 
         const header = document.createElement("div");
         header.innerHTML = `
@@ -229,16 +249,16 @@
       });
     }
 
-    // Handle Form Submit
     document.getElementById("quizForm").addEventListener("submit", async (e) => {
       e.preventDefault();
       clearInterval(timerInterval);
 
       const submitBtn = document.getElementById("submitBtn");
       submitBtn.disabled = true;
-      submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i><span>Recording...</span>`;
+      submitBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i><span>Submitting...</span>`;
 
-      const studentId = document.getElementById("studentId").value;
+      const studentName = document.getElementById("studentName").value.trim();
+      const studentId = document.getElementById("studentId").value.trim();
       const answers = {};
 
       activeQuiz.questions.forEach((q) => {
@@ -250,6 +270,7 @@
 
       const payload = {
         studentId,
+        studentName,
         quizId: activeQuiz.id,
         answers,
         durationSeconds: secondsElapsed
@@ -262,16 +283,14 @@
           body: JSON.stringify(payload)
         });
       } catch (err) {
-        console.warn("Backend not reached; proceeding with local demo state:", err);
+        console.warn("Backend unavailable; demo fallback recorded:", err);
       }
 
-      // Display Success State
       document.getElementById("quizForm").classList.add("hidden");
       document.getElementById("successScreen").classList.remove("hidden");
       document.getElementById("completionTime").textContent = `${secondsElapsed} seconds`;
     });
 
-    // Reset for live repetitive hackathon demos
     function resetQuiz() {
       document.getElementById("quizForm").reset();
       document.getElementById("quizForm").classList.remove("hidden");
@@ -283,7 +302,6 @@
       startTimer();
     }
 
-    // Initialize on page load
     window.addEventListener("DOMContentLoaded", loadQuiz);
   </script>
 </body>
