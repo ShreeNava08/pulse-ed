@@ -3,12 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PulseEd - Educator Diagnostic Dashboard</title>
-  <!-- Tailwind CSS CDN -->
+  <title>PulseEd - Math Diagnostic Dashboard</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body class="bg-slate-100 text-slate-800 antialiased min-h-screen">
@@ -18,11 +15,11 @@
     <div class="max-w-7xl mx-auto flex items-center justify-between">
       <div class="flex items-center space-x-3">
         <div class="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center text-white text-lg font-bold shadow-sm">
-          <i class="fa-solid fa-heart-pulse"></i>
+          <i class="fa-solid fa-square-root-variable"></i>
         </div>
         <div>
           <span class="font-extrabold text-lg text-slate-900 tracking-tight">PulseEd</span>
-          <span class="text-xs bg-blue-100 text-blue-700 font-semibold px-2 py-0.5 rounded-full ml-1 sm:ml-2">Educator Portal</span>
+          <span class="text-xs bg-blue-100 text-blue-700 font-semibold px-2 py-0.5 rounded-full ml-1 sm:ml-2">Math-1: Calculus & Algebra</span>
         </div>
       </div>
 
@@ -33,7 +30,7 @@
           class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold py-2 px-3 rounded-lg transition inline-flex items-center space-x-1.5 shadow-sm">
           <i class="fa-solid fa-mobile-screen"></i>
           <span class="hidden sm:inline">Open Student Ticket</span>
-          <span class="sm:hidden">Student</span>
+          <span class="sm:hidden">Ticket</span>
         </a>
 
         <button 
@@ -66,7 +63,7 @@
           <span>Class Mastery</span>
           <i class="fa-solid fa-chart-line text-emerald-500 text-base"></i>
         </div>
-        <p class="text-2xl font-black text-slate-900 mt-2" id="kpiMastery">68.6%</p>
+        <p class="text-2xl font-black text-slate-900 mt-2" id="kpiMastery">66.3%</p>
         <p class="text-xs text-slate-500 font-medium mt-1">Benchmark threshold: 70%</p>
       </div>
 
@@ -76,7 +73,7 @@
           <i class="fa-solid fa-triangle-exclamation text-amber-500 text-base"></i>
         </div>
         <p class="text-2xl font-black text-amber-600 mt-2" id="kpiAtRisk">3</p>
-        <p class="text-xs text-amber-700 font-medium mt-1">Struggling ≥ 2 classes</p>
+        <p class="text-xs text-amber-700 font-medium mt-1">Struggling with prerequisites</p>
       </div>
 
       <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
@@ -84,8 +81,8 @@
           <span>Target Bottleneck</span>
           <i class="fa-solid fa-fire text-rose-500 text-base"></i>
         </div>
-        <p class="text-base sm:text-lg font-bold text-rose-600 mt-2 truncate" id="kpiBottleneck">Action-Reaction</p>
-        <p class="text-xs text-rose-500 font-medium mt-1">42% mastery recorded</p>
+        <p class="text-base sm:text-lg font-bold text-rose-600 mt-2 truncate" id="kpiBottleneck">Limits (0/0 Form)</p>
+        <p class="text-xs text-rose-500 font-medium mt-1">44% mastery recorded</p>
       </div>
     </section>
 
@@ -96,7 +93,7 @@
       <section class="lg:col-span-7 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
         <div class="flex items-center justify-between">
           <div>
-            <h2 class="text-base font-bold text-slate-900">Concept Mastery Distribution</h2>
+            <h2 class="text-base font-bold text-slate-900">Foundational Concept Mastery</h2>
             <p class="text-xs text-slate-500">Real-time aggregation from today's Exit Ticket</p>
           </div>
           <span class="text-[11px] bg-slate-100 text-slate-600 font-semibold px-2.5 py-1 rounded-md">
@@ -111,12 +108,12 @@
         <!-- Prescribed Action Banner -->
         <div class="bg-amber-50 border border-amber-200 rounded-xl p-4 flex items-start space-x-3.5">
           <div class="w-8 h-8 rounded-lg bg-amber-500 text-white flex items-center justify-center shrink-0 mt-0.5">
-            <i class="fa-solid fa-bullhorn text-sm"></i>
+            <i class="fa-solid fa-lightbulb text-sm"></i>
           </div>
           <div>
             <h3 class="text-xs font-bold uppercase tracking-wide text-amber-800">Prescribed Remedial Action</h3>
             <p class="text-xs text-amber-900 mt-1 leading-relaxed">
-              58% of respondents confused Newton's 3rd Law pairs with normal gravitational balance. Allocate <strong>5 minutes tomorrow</strong> to review free-body diagrams before advancing.
+              56% of students stumbled on evaluating <strong>indeterminate forms (0/0)</strong> via algebraic factoring. Allocate <strong>5 minutes tomorrow</strong> to review (a² - b²) factoring before starting L'Hôpital's Rule.
             </p>
           </div>
         </div>
@@ -127,8 +124,8 @@
         <div>
           <div class="flex items-center justify-between mb-4">
             <div>
-              <h2 class="text-base font-bold text-slate-900">Live Ticket Submissions</h2>
-              <p class="text-xs text-slate-500">Auto-refreshing incoming stream</p>
+              <h2 class="text-base font-bold text-slate-900">Live Student Stream</h2>
+              <p class="text-xs text-slate-500">Auto-refreshing submissions</p>
             </div>
             <span class="inline-flex items-center text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full">
               <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full mr-1 animate-pulse"></span> AUTO-SYNC
@@ -153,10 +150,10 @@
       <div class="p-6 border-b border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
         <div>
           <h2 class="text-base font-bold text-slate-900">Priority Intervention Roster (Early Warning)</h2>
-          <p class="text-xs text-slate-500">Students flagged across consecutive classes</p>
+          <p class="text-xs text-slate-500">Students repeatedly struggling with prerequisite math skills</p>
         </div>
         <span class="text-xs font-semibold bg-rose-50 text-rose-700 border border-rose-200 px-3 py-1 rounded-lg">
-          Attention Required
+          Intervention Needed
         </span>
       </div>
 
@@ -164,12 +161,12 @@
         <table class="w-full text-left text-xs text-slate-600">
           <thead class="bg-slate-50 text-slate-400 uppercase font-semibold text-[10px] border-b border-slate-200">
             <tr>
-              <th class="py-3 px-6">Roll No / ID</th>
-              <th class="py-3 px-6">Student Name</th>
-              <th class="py-3 px-6">Consecutive Gaps</th>
-              <th class="py-3 px-6">Struggling Concept</th>
-              <th class="py-3 px-6">Status</th>
-              <th class="py-3 px-6 text-right">Recommended Action</th>
+              <th class="py-3.5 px-6">Roll / ID</th>
+              <th class="py-3.5 px-6">Student Name</th>
+              <th class="py-3.5 px-6">Consecutive Gaps</th>
+              <th class="py-3.5 px-6">Weak Prerequisite</th>
+              <th class="py-3.5 px-6">Status</th>
+              <th class="py-3.5 px-6 text-right">Recommended Action</th>
             </tr>
           </thead>
           <tbody class="divide-y divide-slate-100" id="atRiskTableBody"></tbody>
@@ -184,14 +181,14 @@
       totalStudents: 30,
       submissionsCount: 28,
       conceptMastery: [
-        { concept: "Inertia of Motion", masteryPct: 88, status: "Good" },
-        { concept: "Newton's First Law", masteryPct: 76, status: "Moderate" },
-        { concept: "Action-Reaction Pairs", masteryPct: 42, status: "Critical Bottleneck" }
+        { concept: "Derivative as Slope", masteryPct: 84, status: "Good" },
+        { concept: "Algebraic Roots", masteryPct: 71, status: "Moderate" },
+        { concept: "Limits & Indeterminate Forms", masteryPct: 44, status: "Critical Bottleneck" }
       ],
       atRiskStudents: [
-        { id: "S103", name: "Mohammed Zeeshan", fails: 3, weakConcept: "Action-Reaction Pairs", status: "Critical" },
-        { id: "S101", name: "Aditi Rao", fails: 2, weakConcept: "Action-Reaction Pairs", status: "At-Risk" },
-        { id: "S105", name: "Vikram Patil", fails: 2, weakConcept: "Newton's First Law", status: "At-Risk" }
+        { id: "S103", name: "Mohammed Zeeshan", fails: 3, weakConcept: "Limits & Indeterminate Forms", status: "Critical" },
+        { id: "S101", name: "Aditi Rao", fails: 2, weakConcept: "Limits & Indeterminate Forms", status: "At-Risk" },
+        { id: "S105", name: "Vikram Patil", fails: 2, weakConcept: "Algebraic Roots", status: "At-Risk" }
       ],
       recentSubmissions: [
         { name: "Sneha Nair", id: "S104", score: "3/3", time: "1 min ago" },
@@ -275,7 +272,7 @@
           </td>
           <td class="py-3 px-6 text-right">
             <button 
-              onclick="alert('Intervention packet assigned for ${s.name}: 3-minute prerequisite review.')" 
+              onclick="alert('5-Minute Prerequisite Review packet generated for ${s.name}!')" 
               class="bg-blue-50 hover:bg-blue-100 text-blue-600 font-semibold px-3 py-1.5 rounded-lg border border-blue-200 text-xs transition">
               Assign 5-Min Review
             </button>
@@ -346,7 +343,6 @@
 
     window.addEventListener("DOMContentLoaded", () => {
       fetchAnalytics();
-      // Auto-poll every 3 seconds for stage presentations
       setInterval(fetchAnalytics, 3000);
     });
   </script>

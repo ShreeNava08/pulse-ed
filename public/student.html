@@ -3,10 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PulseEd - Daily Exit Ticket</title>
-  <!-- Tailwind CSS CDN -->
+  <title>PulseEd - Math Exit Ticket</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     input[type="radio"]:checked + label {
@@ -25,12 +23,11 @@
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-2">
           <div class="w-8 h-8 rounded-lg bg-white/20 flex items-center justify-center font-bold text-white text-base">
-            <i class="fa-solid fa-heart-pulse"></i>
+            <i class="fa-solid fa-calculator"></i>
           </div>
           <span class="font-bold tracking-wide text-lg">PulseEd</span>
         </div>
         
-        <!-- Switch to Teacher Portal Button -->
         <a href="/teacher.html" class="text-xs bg-white/20 hover:bg-white/30 text-white font-semibold px-2.5 py-1.5 rounded-lg transition inline-flex items-center space-x-1 shadow-sm">
           <i class="fa-solid fa-chalkboard-user"></i>
           <span>Teacher View</span>
@@ -39,8 +36,8 @@
 
       <div class="mt-4 flex items-center justify-between">
         <div>
-          <h1 class="text-lg font-bold" id="quizTopic">Physics: Laws of Motion</h1>
-          <p class="text-xs text-blue-100">Daily Concept Check-in • Anonymous to Peers</p>
+          <h1 class="text-lg font-bold" id="quizTopic">Calculus & Algebra Check-in</h1>
+          <p class="text-xs text-blue-100">2-Minute Diagnostic • Prerequisite Mastery</p>
         </div>
         <span class="text-xs bg-white/20 px-2 py-1 rounded-full font-medium tracking-wide shrink-0">
           <i class="fa-regular fa-clock mr-1"></i><span id="timer">00:00</span>
@@ -48,32 +45,32 @@
       </div>
     </header>
 
-    <!-- Quiz Form -->
+    <!-- Form -->
     <form id="quizForm" class="p-5 space-y-5">
       
-      <!-- Custom Student / Judge Input -->
+      <!-- Free Text Input for ANY Name and Roll/ID -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <div>
           <label for="studentName" class="block text-xs font-semibold uppercase text-slate-500 mb-1 tracking-wider">
-            Your Name
+            Your Full Name
           </label>
           <input 
             type="text" 
             id="studentName" 
             required 
-            placeholder="e.g., Judge / Ramesh" 
+            placeholder="e.g., Dr. Evaluator / Priya" 
             class="w-full bg-slate-50 border border-slate-300 text-slate-700 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
           >
         </div>
         <div>
           <label for="studentId" class="block text-xs font-semibold uppercase text-slate-500 mb-1 tracking-wider">
-            Roll / ID No.
+            Roll No / ID
           </label>
           <input 
             type="text" 
             id="studentId" 
             required 
-            placeholder="e.g., JDG-01" 
+            placeholder="e.g., 1BM26CS042 or JUDGE" 
             class="w-full bg-slate-50 border border-slate-300 text-slate-700 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
           >
         </div>
@@ -81,26 +78,26 @@
 
       <hr class="border-slate-100">
 
-      <!-- Dynamic Questions -->
+      <!-- Dynamic Math Questions -->
       <div id="questionsContainer" class="space-y-5"></div>
 
-      <!-- Action Button -->
+      <!-- Submit Button -->
       <button 
         type="submit" 
         id="submitBtn"
         class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded-xl shadow-md transition duration-200 flex items-center justify-center space-x-2 text-sm">
-        <span>Submit Exit Ticket</span>
+        <span>Submit Math Exit Ticket</span>
         <i class="fa-solid fa-arrow-right text-xs"></i>
       </button>
     </form>
 
-    <!-- Success Screen -->
+    <!-- Confirmation Screen -->
     <section id="successScreen" class="p-8 text-center hidden space-y-4">
       <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto text-2xl shadow-inner animate-bounce">
         <i class="fa-solid fa-check"></i>
       </div>
       <div>
-        <h2 class="text-xl font-bold text-slate-800">Response Recorded!</h2>
+        <h2 class="text-xl font-bold text-slate-800">Check-in Submitted!</h2>
         <p class="text-xs text-slate-500 mt-1 leading-relaxed">
           Completed in <span id="completionTime" class="font-semibold text-slate-700">--</span>. Dashboard updated in real time.
         </p>
@@ -108,9 +105,9 @@
 
       <div class="bg-slate-50 p-3 rounded-xl border border-slate-100 text-left text-xs text-slate-600 space-y-1">
         <p class="font-semibold text-slate-700 flex items-center">
-          <i class="fa-solid fa-lightbulb text-amber-500 mr-1.5"></i> Why this helps:
+          <i class="fa-solid fa-circle-info text-blue-500 mr-1.5"></i> Diagnostic Purpose:
         </p>
-        <p>No penalty for mistakes. Your response flags which concepts need revision before next class.</p>
+        <p>Flags foundational calculus prerequisites that require 5-minute review before tomorrow's lecture.</p>
       </div>
 
       <div class="flex flex-col space-y-2 pt-2">
@@ -118,12 +115,12 @@
           type="button" 
           onclick="resetQuiz()" 
           class="text-xs text-blue-600 hover:text-blue-800 font-medium py-1.5">
-          Submit Another Entry (Demo Mode)
+          Submit Another Entry (Test Mode)
         </button>
         <a 
           href="/teacher.html" 
           class="text-xs bg-slate-900 hover:bg-slate-800 text-white font-semibold py-2.5 px-4 rounded-xl transition inline-block">
-          View Teacher Dashboard Live →
+          Open Teacher Dashboard →
         </a>
       </div>
     </section>
@@ -132,39 +129,39 @@
 
   <script>
     const fallbackQuiz = {
-      id: "quiz_01",
-      topic: "Physics: Laws of Motion",
+      id: "quiz_math_01",
+      topic: "Mathematics: Calculus & Foundational Algebra",
       questions: [
         {
           id: "q1",
-          text: "If the net external force on a moving object is zero, what happens to its velocity?",
-          concept: "Newton's First Law",
+          text: "What are the roots of the quadratic equation (x - 3)(x + 2) = 0?",
+          concept: "Algebraic Roots",
           options: [
-            "It drops to zero instantly",
-            "It remains constant in magnitude and direction",
-            "It continuously increases"
+            "x = 3 and x = -2",
+            "x = -3 and x = 2",
+            "x = 3 and x = 2"
           ],
-          correctIndex: 1
+          correctIndex: 0
         },
         {
           id: "q2",
-          text: "A heavy book rests on a table. Which pair represents Newton's 3rd Law pair?",
-          concept: "Action-Reaction Pairs",
+          text: "What is the limit of (x² - 1) / (x - 1) as x approaches 1?",
+          concept: "Limits & Indeterminate Forms",
           options: [
-            "Gravity pulling down & Normal force pushing up",
-            "Book pushing the table & Table pushing the book",
-            "Weight of the book & Air resistance"
+            "0 (zero)",
+            "1",
+            "2"
           ],
-          correctIndex: 1
+          correctIndex: 2
         },
         {
           id: "q3",
-          text: "Why do passengers jerk forward when a bus suddenly hits the brakes?",
-          concept: "Inertia of Motion",
+          text: "Geometrically, what does the first derivative f'(a) represent on a curve y = f(x)?",
+          concept: "Derivative as Slope of Tangent",
           options: [
-            "A backward force pushes them",
-            "Their upper body continues in forward motion due to inertia",
-            "Air friction inside the cabin increases"
+            "The total area under the curve up to x = a",
+            "The slope of the tangent line at x = a",
+            "The distance between point a and the y-axis"
           ],
           correctIndex: 1
         }
@@ -212,9 +209,9 @@
         header.innerHTML = `
           <div class="flex items-center justify-between text-xs mb-1">
             <span class="font-bold text-blue-600">Q${qIdx + 1}</span>
-            <span class="bg-slate-100 text-slate-500 px-2 py-0.5 rounded text-[10px] uppercase font-semibold">${q.concept}</span>
+            <span class="bg-blue-50 text-blue-700 px-2 py-0.5 rounded text-[10px] uppercase font-bold tracking-wider">${q.concept}</span>
           </div>
-          <p class="text-sm font-medium text-slate-800 leading-snug">${q.text}</p>
+          <p class="text-sm font-semibold text-slate-800 leading-snug">${q.text}</p>
         `;
         questionBlock.appendChild(header);
 
@@ -283,7 +280,7 @@
           body: JSON.stringify(payload)
         });
       } catch (err) {
-        console.warn("Backend unavailable; demo fallback recorded:", err);
+        console.warn("Backend reached with demo state:", err);
       }
 
       document.getElementById("quizForm").classList.add("hidden");
@@ -297,7 +294,7 @@
       document.getElementById("successScreen").classList.add("hidden");
       const submitBtn = document.getElementById("submitBtn");
       submitBtn.disabled = false;
-      submitBtn.innerHTML = `<span>Submit Exit Ticket</span><i class="fa-solid fa-arrow-right text-xs"></i>`;
+      submitBtn.innerHTML = `<span>Submit Math Exit Ticket</span><i class="fa-solid fa-arrow-right text-xs"></i>`;
       secondsElapsed = 0;
       startTimer();
     }

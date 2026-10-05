@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(express.static(__dirname));
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Safe file resolver (checks root, public folder, and case sensitivity)
+// Safe file resolver
 function sendHtmlFile(res, fileName) {
   const rootPath = path.join(__dirname, fileName);
   const publicPath = path.join(__dirname, 'public', fileName);
@@ -24,51 +24,52 @@ function sendHtmlFile(res, fileName) {
   } else if (fs.existsSync(publicPath)) {
     return res.sendFile(publicPath);
   } else {
-    return res.status(404).send(
-      `<h3>Error 404: ${fileName} not found</h3>` +
-      `<p>Make sure ${fileName} is added and pushed to your GitHub repository.</p>`
-    );
+    return res.status(404).send(`<h3>Error 404: ${fileName} not found</h3>`);
   }
 }
 
-// Web Page Routes
-app.get('/', (req, res) => {
-  sendHtmlFile(res, 'student.html');
-});
+// Routes
+app.get('/', (req, res) => sendHtmlFile(res, 'student.html'));
+app.get('/student.html', (req, res) => sendHtmlFile(res, 'student.html'));
+app.get('/teacher.html', (req, res) => sendHtmlFile(res, 'teacher.html'));
 
-app.get('/student.html', (req, res) => {
-  sendHtmlFile(res, 'student.html');
-});
-
-app.get('/teacher.html', (req, res) => {
-  sendHtmlFile(res, 'teacher.html');
-});
-
-// Self-contained Quiz and Student Datasets
+// Mathematics: Calculus & Algebra Dataset
 let quizzes = [
   {
-    id: "quiz_01",
-    topic: "Physics: Laws of Motion",
+    id: "quiz_math_01",
+    topic: "Mathematics: Calculus & Foundational Algebra",
     questions: [
       {
         id: "q1",
-        text: "If the net external force on a moving object is zero, what happens to its velocity?",
-        concept: "Newton's First Law",
-        options: ["It drops to zero instantly", "It remains constant in magnitude and direction", "It continuously increases"],
-        correctIndex: 1
+        text: "What are the roots of the quadratic equation (x - 3)(x + 2) = 0?",
+        concept: "Algebraic Roots",
+        options: [
+          "x = 3 and x = -2",
+          "x = -3 and x = 2",
+          "x = 3 and x = 2"
+        ],
+        correctIndex: 0
       },
       {
         id: "q2",
-        text: "A heavy book rests on a table. Which pair represents Newton's 3rd Law pair?",
-        concept: "Action-Reaction Pairs",
-        options: ["Gravity pulling down & Normal force pushing up", "Book pushing table & Table pushing book", "Weight & Air resistance"],
-        correctIndex: 1
+        text: "What is the limit of (x² - 1) / (x - 1) as x approaches 1?",
+        concept: "Limits & Indeterminate Forms",
+        options: [
+          "0 (zero)",
+          "1",
+          "2"
+        ],
+        correctIndex: 2
       },
       {
         id: "q3",
-        text: "Why do passengers jerk forward when a bus suddenly hits the brakes?",
-        concept: "Inertia of Motion",
-        options: ["A backward force pushes them", "Upper body continues in forward motion due to inertia", "Air friction inside cabin"],
+        text: "Geometrically, what does the first derivative f'(a) represent on a curve y = f(x)?",
+        concept: "Derivative as Slope of Tangent",
+        options: [
+          "The total area under the curve up to x = a",
+          "The slope of the tangent line at x = a",
+          "The distance between point a and the y-axis"
+        ],
         correctIndex: 1
       }
     ]
@@ -76,11 +77,11 @@ let quizzes = [
 ];
 
 let students = [
-  { id: "S101", name: "Aditi Rao", fails: 2, weakConcept: "Action-Reaction Pairs", status: "At-Risk" },
+  { id: "S101", name: "Aditi Rao", fails: 2, weakConcept: "Limits & Indeterminate Forms", status: "At-Risk" },
   { id: "S102", name: "Karthik Gowda", fails: 0, weakConcept: "None", status: "On-Track" },
-  { id: "S103", name: "Mohammed Zeeshan", fails: 3, weakConcept: "Action-Reaction Pairs", status: "Critical" },
+  { id: "S103", name: "Mohammed Zeeshan", fails: 3, weakConcept: "Limits & Indeterminate Forms", status: "Critical" },
   { id: "S104", name: "Sneha Nair", fails: 0, weakConcept: "None", status: "On-Track" },
-  { id: "S105", name: "Vikram Patil", fails: 2, weakConcept: "Newton's First Law", status: "At-Risk" }
+  { id: "S105", name: "Vikram Patil", fails: 2, weakConcept: "Algebraic Roots", status: "At-Risk" }
 ];
 
 let liveSubmissions = [
@@ -107,9 +108,10 @@ app.post('/api/submit', (req, res) => {
     }
   });
 
-  const displayName = studentName || studentId || "Demo Student";
+  const displayName = studentName || studentId || "Anonymous Student";
   const displayId = studentId || "DEMO";
 
+  // Prepend new submission to live stream
   liveSubmissions.unshift({
     name: displayName,
     id: displayId,
@@ -119,6 +121,7 @@ app.post('/api/submit', (req, res) => {
 
   totalSubmissionsCount += 1;
 
+  // Add low score directly to At-Risk table for live demo effect
   if (correctCount <= 1) {
     const existingIndex = students.findIndex(s => s.id === displayId);
     if (existingIndex !== -1) {
@@ -129,7 +132,7 @@ app.post('/api/submit', (req, res) => {
         id: displayId,
         name: displayName,
         fails: 1,
-        weakConcept: "Action-Reaction Pairs",
+        weakConcept: "Limits & Indeterminate Forms",
         status: "At-Risk"
       });
     }
@@ -143,9 +146,9 @@ app.get('/api/analytics', (req, res) => {
     totalStudents: 30,
     submissionsCount: totalSubmissionsCount,
     conceptMastery: [
-      { concept: "Inertia of Motion", masteryPct: 88, status: "Good" },
-      { concept: "Newton's First Law", masteryPct: 76, status: "Moderate" },
-      { concept: "Action-Reaction Pairs", masteryPct: 42, status: "Critical Bottleneck" }
+      { concept: "Derivative as Slope", masteryPct: 84, status: "Good" },
+      { concept: "Algebraic Roots", masteryPct: 71, status: "Moderate" },
+      { concept: "Limits & Indeterminate Forms", masteryPct: 44, status: "Critical Bottleneck" }
     ],
     atRiskStudents: students.filter(s => s.fails >= 1),
     recentSubmissions: liveSubmissions
